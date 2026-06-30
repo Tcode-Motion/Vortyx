@@ -18,31 +18,31 @@ export default function ScreenshotsPage() {
 
   const items: ScreenshotItem[] = [
     {
-      src: "/screenshots/home.png",
+      src: "/Vortyx/screenshots/home.png",
       title: "Universal Downloader",
       desc: "Analyze and download media from 50+ portals with one tap.",
       alt: "Vortyx Downloader Tab Screenshot",
     },
     {
-      src: "/screenshots/downloads.png",
+      src: "/Vortyx/screenshots/downloads.png",
       title: "Active Download Queue",
       desc: "Track real-time progress, speeds, and schedule background syncs.",
       alt: "Vortyx Downloads Queue Screenshot",
     },
     {
-      src: "/screenshots/galary.png",
+      src: "/Vortyx/screenshots/galary.png",
       title: "Offline Media Library",
       desc: "Organize and play your downloaded videos and audio files locally.",
       alt: "Vortyx Gallery Tab Screenshot",
     },
     {
-      src: "/screenshots/statussaver.png",
+      src: "/Vortyx/screenshots/statussaver.png",
       title: "WhatsApp Status Saver",
       desc: "Instantly view and save WhatsApp statuses without using internet data.",
       alt: "Vortyx WhatsApp Saver Tab Screenshot",
     },
     {
-      src: "/screenshots/satings.png",
+      src: "/Vortyx/screenshots/satings.png",
       title: "App Customization & Settings",
       desc: "Control clipboard monitoring, Wi-Fi scheduling, and parallel thread limits.",
       alt: "Vortyx Settings Tab Screenshot",
@@ -171,7 +171,7 @@ export default function ScreenshotsPage() {
             onClick={() => openLightbox(0)}
           >
             <Image
-              src="/app-screen-overview.png"
+              src="/Vortyx/app-screen-overview.png"
               alt="Vortyx App Screens Compilation"
               fill
               sizes="100vw"

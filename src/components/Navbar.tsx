@@ -38,7 +38,7 @@ export default function Navbar() {
               <div className="relative w-10 h-10 sm:w-12 sm:h-12 overflow-hidden rounded-2xl bg-gradient-to-tr from-brand-pink via-brand-coral to-brand-amber p-[2px] transition-transform duration-300 group-hover:scale-105 shadow-lg shadow-brand-pink/10">
                 <div className="w-full h-full bg-theme-surface rounded-[14px] flex items-center justify-center overflow-hidden">
                   <Image
-                    src="/icon.png"
+                    src="/Vortyx/icon.png"
                     alt="Vortyx Logo"
                     width={40}
                     height={40}

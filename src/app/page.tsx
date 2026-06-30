@@ -216,7 +216,7 @@ export default function Home() {
               transition={{ duration: 0.7 }}
               className="relative w-full max-w-[280px] sm:max-w-[300px]"
             >
-              <PhoneMockup src="/screenshots/homedark.png" alt="Vortyx Home Screen Dark Mode" priority />
+              <PhoneMockup src="/Vortyx/screenshots/homedark.png" alt="Vortyx Home Screen Dark Mode" priority />
             </motion.div>
           </div>
 
