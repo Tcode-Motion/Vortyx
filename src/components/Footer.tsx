@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { Mail, Globe, ArrowUp } from "lucide-react";
+import { Globe, ArrowUp } from "lucide-react";
 import GithubIcon from "./GithubIcon";
 
 export default function Footer() {
@@ -47,13 +47,7 @@ export default function Footer() {
               >
                 <GithubIcon size={18} />
               </a>
-              <a
-                href="mailto:support@vortyx.app"
-                className="p-2 rounded-full bg-theme-surface-elevated border border-theme-border/40 hover:text-brand-pink hover:border-brand-pink/30 text-theme-foreground/80 transition-all duration-200"
-                aria-label="Email Support"
-              >
-                <Mail size={18} />
-              </a>
+
               <a
                 href="/"
                 className="p-2 rounded-full bg-theme-surface-elevated border border-theme-border/40 hover:text-brand-pink hover:border-brand-pink/30 text-theme-foreground/80 transition-all duration-200"

@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Send, CheckCircle, Mail, Globe, HelpCircle } from "lucide-react";
+import { Send, CheckCircle, Globe } from "lucide-react";
 import GithubIcon from "../../components/GithubIcon";
 
 export default function ContactPage() {
@@ -75,12 +75,7 @@ export default function ContactPage() {
             </ul>
           </div>
 
-          <div className="p-5 rounded-2xl bg-theme-surface-elevated border border-theme-border/40 flex items-start gap-3">
-            <HelpCircle className="text-brand-pink mt-0.5 flex-shrink-0" size={18} />
-            <p className="text-xs text-theme-foreground-muted leading-relaxed">
-              For common support queries regarding WhatsApp permission grants or offline cache deletions, please check our dedicated <a href="/support" className="text-brand-pink hover:underline font-bold">Support Page</a> before contacting us.
-            </p>
-          </div>
+
         </div>
 
         {/* Right Side: Form */}
