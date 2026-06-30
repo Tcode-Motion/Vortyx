@@ -226,6 +226,16 @@ export default function DownloadPage() {
               <li>Implemented offline status scanner for WhatsApp / WA Business.</li>
               <li>Material Design 3 style guidelines with dark mode settings.</li>
             </ul>
+            <div className="mt-3 pl-4">
+              <a
+                href="https://github.com/Tcode-Motion/Vortyx/releases/tag/v1.0.0"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-pink hover:underline"
+              >
+                View v1.0.0 Release Notes on GitHub &rarr;
+              </a>
+            </div>
           </div>
         </div>
       </section>
