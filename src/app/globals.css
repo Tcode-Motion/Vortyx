@@ -1,26 +1,87 @@
 @import "tailwindcss";
 
+@theme {
+  --color-brand-pink: #FA3E25;
+  --color-brand-coral: #FF7043;
+  --color-brand-amber: #FFC107;
+  
+  --color-theme-bg: var(--theme-bg);
+  --color-theme-surface: var(--theme-surface);
+  --color-theme-surface-elevated: var(--theme-surface-elevated);
+  --color-theme-border: var(--theme-border);
+  --color-theme-foreground: var(--theme-foreground);
+  --color-theme-foreground-muted: var(--theme-foreground-muted);
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --theme-bg: #FAF7F6;
+  --theme-surface: #FFFFFF;
+  --theme-surface-elevated: #FDFBFB;
+  --theme-border: #F0EAE7;
+  --theme-foreground: #1E1C21;
+  --theme-foreground-muted: #8D8893;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.dark {
+  --theme-bg: #0F0F12;
+  --theme-surface: #18171E;
+  --theme-surface-elevated: #222129;
+  --theme-border: #222129;
+  --theme-foreground: #FFFFFF;
+  --theme-foreground-muted: #94909C;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--theme-bg);
+  color: var(--theme-foreground);
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  overflow-x: hidden;
+}
+
+/* Glassmorphism utilities */
+.glass {
+  background-color: rgba(var(--glass-bg-rgb), 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(var(--glass-border-rgb), 0.08);
+}
+
+:root {
+  --glass-bg-rgb: 250, 247, 246;
+  --glass-border-rgb: 30, 28, 33;
+}
+
+.dark {
+  --glass-bg-rgb: 24, 23, 30;
+  --glass-border-rgb: 255, 255, 255;
+}
+
+/* Custom animations */
+@keyframes pulse-gradient {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1) translate(0px, 0px);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.15) translate(30px, -30px);
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-gradient 12s infinite ease-in-out;
+}
+
+.animate-pulse-slower {
+  animation: pulse-gradient 18s infinite ease-in-out;
+}
+
+/* Hide scrollbar but keep functionality */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
