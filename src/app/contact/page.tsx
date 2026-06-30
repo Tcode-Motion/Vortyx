@@ -49,17 +49,7 @@ export default function ContactPage() {
             </p>
 
             <ul className="space-y-4 text-sm">
-              <li className="flex items-center gap-3">
-                <div className="p-2.5 rounded-xl bg-brand-pink/10 border border-brand-pink/20 text-brand-pink">
-                  <Mail size={16} />
-                </div>
-                <div>
-                  <span className="block text-xs text-theme-foreground-muted">Support Inbox</span>
-                  <a href="mailto:support@vortyx.app" className="font-semibold text-theme-foreground hover:underline">
-                    support@vortyx.app
-                  </a>
-                </div>
-              </li>
+
               <li className="flex items-center gap-3">
                 <div className="p-2.5 rounded-xl bg-brand-coral/10 border border-brand-coral/20 text-brand-coral">
                   <GithubIcon size={16} />
