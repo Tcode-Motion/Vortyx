@@ -13,7 +13,7 @@ export default function manifest(): MetadataRoute.Manifest {
     theme_color: "#FA3E25",
     icons: [
       {
-        src: "/icon.png",
+        src: "/Vortyx/icon.png",
         sizes: "any",
         type: "image/png",
       },

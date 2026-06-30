@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     siteName: "Vortyx App",
     images: [
       {
-        url: "/icon.png",
+        url: "/Vortyx/icon.png",
         width: 512,
         height: 512,
         alt: "Vortyx App Icon",
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     title: "Vortyx | Premium All Media Downloader & Manager",
     description:
       "Professional offline-first utility designed to download and organize video, audio, and images from 50+ social platforms.",
-    images: ["/icon.png"],
+    images: ["/Vortyx/icon.png"],
   },
   manifest: "/manifest.json",
 };
