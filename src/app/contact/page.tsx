@@ -66,8 +66,8 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <span className="block text-xs text-theme-foreground-muted">GitHub Repository</span>
-                  <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="font-semibold text-theme-foreground hover:underline">
-                    github.com/vortyx/app
+                  <a href="https://github.com/Tcode-Motion/Vortyx" target="_blank" rel="noopener noreferrer" className="font-semibold text-theme-foreground hover:underline">
+                    github.com/Tcode-Motion/Vortyx
                   </a>
                 </div>
               </li>
@@ -77,9 +77,9 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <span className="block text-xs text-theme-foreground-muted">Official Site</span>
-                  <span className="font-semibold text-theme-foreground">
-                    vortyx.app
-                  </span>
+                  <a href="https://techscript.is-a.dev/Vortyx" target="_blank" rel="noopener noreferrer" className="font-semibold text-theme-foreground hover:underline">
+                    techscript.is-a.dev/Vortyx
+                  </a>
                 </div>
               </li>
             </ul>

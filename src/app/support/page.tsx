@@ -139,7 +139,7 @@ export default function SupportPage() {
               Encountered a crash or a broken download engine? Create an issue on our GitHub repository. Make sure to attach Logcat records if possible.
             </p>
             <a
-              href="https://github.com"
+              href="https://github.com/Tcode-Motion/Vortyx"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block text-xs font-bold text-brand-coral hover:underline"

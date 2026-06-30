@@ -39,7 +39,7 @@ export default function Footer() {
             </p>
             <div className="flex items-center gap-4 pt-2">
               <a
-                href="https://github.com"
+                href="https://github.com/Tcode-Motion/Vortyx"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 rounded-full bg-theme-surface-elevated border border-theme-border/40 hover:text-brand-pink hover:border-brand-pink/30 text-theme-foreground/80 transition-all duration-200"

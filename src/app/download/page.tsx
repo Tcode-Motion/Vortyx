@@ -77,7 +77,7 @@ export default function DownloadPage() {
             {/* Downloader Button */}
             <div className="flex flex-col sm:flex-row items-center gap-4">
               <a
-                href="/vortyx-v1.0.apk"
+                href="/Vortyx/vortyx-v1.0.apk"
                 download
                 className="w-full sm:w-auto px-10 py-5 rounded-full bg-gradient-to-r from-brand-pink via-brand-coral to-brand-amber text-white font-bold flex items-center justify-center gap-3 shadow-lg shadow-brand-pink/20 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
               >
@@ -85,7 +85,7 @@ export default function DownloadPage() {
                 Download Stable APK (9.54 MB)
               </a>
               <a
-                href="https://github.com"
+                href="https://github.com/Tcode-Motion/Vortyx/releases/tag/v1.0.0"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full sm:w-auto px-8 py-5 rounded-full bg-theme-surface border border-theme-border/60 hover:bg-theme-surface-elevated text-theme-foreground font-bold flex items-center justify-center gap-2 transition-all duration-300"

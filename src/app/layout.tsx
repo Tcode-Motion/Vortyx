@@ -35,11 +35,11 @@ export const metadata: Metadata = {
     "Private Downloader",
   ],
   authors: [{ name: "Vortyx Dev Team" }],
-  metadataBase: new URL("https://vortyx.app"), // Fallback canonical base
+  metadataBase: new URL("https://techscript.is-a.dev/Vortyx"), // Fallback canonical base
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://vortyx.app",
+    url: "https://techscript.is-a.dev/Vortyx",
     title: "Vortyx | Premium All Media Downloader & Manager",
     description:
       "Professional offline-first utility designed to download and organize video, audio, and images from 50+ social platforms. Features a high-fidelity integrated media player.",

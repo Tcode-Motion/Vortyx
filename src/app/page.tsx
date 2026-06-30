@@ -176,7 +176,7 @@ export default function Home() {
                 Download APK (9.54 MB)
               </Link>
               <a
-                href="https://github.com"
+                href="https://github.com/Tcode-Motion/Vortyx"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full sm:w-auto px-8 py-4 rounded-full bg-theme-surface border border-theme-border/60 hover:border-theme-foreground hover:bg-theme-surface-elevated text-theme-foreground font-bold flex items-center justify-center gap-2 transition-all duration-300"
