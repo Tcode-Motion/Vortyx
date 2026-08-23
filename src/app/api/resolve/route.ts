@@ -3,8 +3,6 @@ import { providerRegistry } from "../../../lib/providers/registry";
 import { validateUrlSecurity, SecurityError } from "../../../lib/security/ssrfGuard";
 import { checkRateLimit, getClientIp } from "../../../lib/security/rateLimiter";
 
-export const dynamic = "force-dynamic";
-
 export async function POST(req: NextRequest) {
   const ip = getClientIp(req);
   const rateLimit = checkRateLimit(ip);

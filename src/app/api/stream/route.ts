@@ -4,8 +4,6 @@ import { downloadAndProcessMedia } from "../../../lib/media/pipeline";
 import { validateUrlSecurity, SecurityError } from "../../../lib/security/ssrfGuard";
 import { sanitizeFilename } from "../../../lib/security/sanitize";
 
-export const dynamic = "force-dynamic";
-
 export async function GET(req: NextRequest) {
   const url = req.nextUrl.searchParams.get("url") || "";
   const sourceUrl = req.nextUrl.searchParams.get("sourceUrl") || url;

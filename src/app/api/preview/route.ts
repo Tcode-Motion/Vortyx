@@ -3,8 +3,6 @@ import fs from "fs";
 import { downloadAndProcessMedia } from "../../../lib/media/pipeline";
 import { validateUrlSecurity, SecurityError } from "../../../lib/security/ssrfGuard";
 
-export const dynamic = "force-dynamic";
-
 export async function GET(req: NextRequest) {
   const targetUrl = req.nextUrl.searchParams.get("url") || "";
   const type = (req.nextUrl.searchParams.get("type") || "video") as "video" | "audio";
