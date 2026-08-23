@@ -1,0 +1,4 @@
+User-Agent: *
+Allow: /
+
+Sitemap: https://techscript.is-a.dev/Vortyx/sitemap.xml
