@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "test:ext": "npx tsx tests/extension_api_test.ts",
     "test:smoke": "npx tsx tests/production_smoke_test.ts",
     "test:validation": "npx tsx tests/full_production_validation_200.ts",
     "test:seo": "npx tsx tests/seo_audit_test.ts",
@@ -26,7 +27,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.9",
     "tailwindcss": "^4",
+    "tsx": "^4.23.12",
     "typescript": "^5"
   }
 }
-

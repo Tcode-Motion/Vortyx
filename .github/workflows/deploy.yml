@@ -35,13 +35,13 @@ jobs:
         run: npm ci
 
       - name: Execute Extension API Tests
-        run: npx tsx tests/extension_api_test.ts
+        run: npm run test:ext
 
       - name: Execute SEO & Metadata Audit
-        run: npx tsx tests/seo_audit_test.ts
+        run: npm run test:seo
 
       - name: Execute Storage & Pipeline Smoke Tests
-        run: npx tsx tests/production_smoke_test.ts
+        run: npm run test:smoke
 
       - name: Build Next.js Production App
         run: npm run build
