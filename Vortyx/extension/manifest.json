@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "Vortyx WhatsApp Web Status Bridge",
+  "version": "1.1.0",
+  "description": "Privacy-first local companion bridge to discover and save viewed WhatsApp Web status media on your machine.",
+  "permissions": [],
+  "host_permissions": [
+    "https://web.whatsapp.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://web.whatsapp.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
