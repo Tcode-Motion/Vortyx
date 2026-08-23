@@ -2,7 +2,10 @@
 
 This directory contains the source code for the official website of the **Vortyx** Android application. It is built using **Next.js 16 (App Router), TypeScript, Tailwind CSS v4, and Framer Motion**.
 
-🌐 **Live Website:** [techscript.is-a.dev/Vortyx/](https://techscript.is-a.dev/Vortyx/)
+🌐 **Live Website & Web Downloader:**
+* **Primary (GitHub Pages):** [https://techscript.is-a.dev/Vortyx/](https://techscript.is-a.dev/Vortyx/)
+* **Alternative Mirror 1 (Firebase):** [https://vortyx-app.web.app/](https://vortyx-app.web.app/)
+* **Alternative Mirror 2 (Firebase):** [https://vortyx-app.firebaseapp.com/](https://vortyx-app.firebaseapp.com/)
 
 ---
 
