@@ -1,4 +1,4 @@
-name: Build, Test and Deploy Vortyx Website
+name: Build, Test and Verify Vortyx Production
 
 on:
   push:
@@ -8,17 +8,15 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
-  pages: write
-  id-token: write
+  contents: read
 
 concurrency:
-  group: "deploy"
+  group: "ci"
   cancel-in-progress: false
 
 jobs:
-  build-test-and-deploy:
-    name: Build, Test & Deploy to GitHub Pages
+  build-and-test:
+    name: Build & Verify Production Architecture
     runs-on: ubuntu-latest
 
     steps:
@@ -45,11 +43,3 @@ jobs:
 
       - name: Build Next.js Production App
         run: npm run build
-
-      - name: Deploy to GitHub Pages Branch (gh-pages)
-        if: github.ref == 'refs/heads/main'
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./out
-          commit_message: "deploy: automated production release to GitHub Pages [skip ci]"
