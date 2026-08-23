@@ -13,6 +13,8 @@ import {
   CheckCircle,
   HelpCircle,
   ArrowRight,
+  Sparkles,
+  Smartphone,
 } from "lucide-react";
 
 export default function FeaturesPage() {
@@ -21,11 +23,26 @@ export default function FeaturesPage() {
   const features = [
     {
       id: 0,
+      title: "Universal Web & App Downloader",
+      tagline: "Instant Browser Access & Native Android",
+      icon: <Globe className="text-brand-pink" size={32} />,
+      badge: "Universal Access",
+      desc: "Vortyx offers the best of both worlds: a high-speed online Web Downloader directly in your browser on PC, Mac, iPhone, and iPad, plus a native Android APK equipped with background download queues and local storage integration.",
+      benefits: [
+        "Zero-installation Web Downloader accessible from any device",
+        "Direct 1080p MP4, 4K, and 320kbps MP3 downloads in the browser",
+        "Zero-watermark TikTok and Instagram Reels extraction",
+        "Integrated in-browser live video and audio player preview",
+      ],
+      example: "Paste any link on the home page -> Preview video stream directly -> Save 1080p MP4 or MP3 file in seconds.",
+    },
+    {
+      id: 1,
       title: "Multi-Engine Resolver",
       tagline: "AI & API In Synergy",
-      icon: <Cpu className="text-brand-pink" size={32} />,
+      icon: <Cpu className="text-brand-coral" size={32} />,
       badge: "AI-Enhanced",
-      desc: "Vortyx uses a proprietary fallback workflow to parse media links. When a user pastes a URL, it is first processed via the high-speed Cobalt API. If the API hits a block or rate limit, Vortyx queries the Gemini 3.5 Flash model to extract structural schemas from the target HTML, or routes the request to our custom MediaPick backend scraper.",
+      desc: "Vortyx uses a proprietary fallback workflow to parse media links. When a user pastes a URL, it is first processed via high-speed Cobalt API instances. If the API hits a block or rate limit, Vortyx queries the Gemini Flash AI model to extract structural schemas from the target HTML, or routes the request to our custom MediaPick scraper.",
       benefits: [
         "Unmatched link resolution success rates (99.8% uptime)",
         "Bypasses complex JavaScript-heavy anti-scraping walls",
@@ -35,10 +52,10 @@ export default function FeaturesPage() {
       example: "Paste a protected short-video link -> Vortyx resolves direct CDN stream -> Downloads 1080p MP4 in seconds.",
     },
     {
-      id: 1,
+      id: 2,
       title: "50+ Supported Portals",
-      tagline: "One App, Infinite Sources",
-      icon: <Globe className="text-brand-coral" size={32} />,
+      tagline: "One Tool, Infinite Sources",
+      icon: <Sparkles className="text-brand-amber" size={32} />,
       badge: "Universal Support",
       desc: "Ditch the bookmarks. Vortyx integrates direct media extraction for over 50 social, music, video, and creative portals. From mainstream video sharing sites to local music catalogs and design portfolio communities, Vortyx recognizes the URL and structures the download workflow accordingly.",
       benefits: [
@@ -50,12 +67,12 @@ export default function FeaturesPage() {
       example: "Copy a Spotify playlist link -> Vortyx queries metadata, matches tracks on YouTube, and downloads high-fidelity MP3 files with album art.",
     },
     {
-      id: 2,
+      id: 3,
       title: "WhatsApp Status Saver",
       tagline: "100% Offline, Zero Data Usage",
       icon: <Share2 className="text-emerald-400" size={32} />,
       badge: "Privacy Focused",
-      desc: "Unlike online status savers that require you to upload cookies or links, Vortyx's WhatsApp Status Saver works entirely locally on your device. By securely requesting authorization to the Android documents tree, the app scans WhatsApp and WhatsApp Business status caches directly.",
+      desc: "Unlike online status savers that require you to upload cookies or links, Vortyx's WhatsApp Status Saver in our Android app works entirely locally on your device. By securely requesting authorization to the Android documents tree, the app scans WhatsApp and WhatsApp Business status caches directly.",
       benefits: [
         "Saves image and video statuses in original quality",
         "Requires zero network connection to function",
@@ -65,12 +82,12 @@ export default function FeaturesPage() {
       example: "Open WhatsApp to load statuses -> Open Vortyx Saver Tab -> Instantly download or share any status to your device.",
     },
     {
-      id: 3,
+      id: 4,
       title: "Integrated Media Center",
       tagline: "High-Fidelity Offline Playback",
-      icon: <Tv className="text-brand-amber" size={32} />,
+      icon: <Tv className="text-indigo-400" size={32} />,
       badge: "Media3 Suite",
-      desc: "Vortyx is not just a downloader; it is a full-featured media manager. Built on the modern Google Media3 and ExoPlayer framework, it delivers highly optimized local audio and video playback, complete with system Media Session integration.",
+      desc: "Vortyx is not just a downloader; it is a full-featured media manager. Built on modern Google Media3 and ExoPlayer frameworks, it delivers highly optimized local audio and video playback, complete with system Media Session integration.",
       benefits: [
         "Video player with fluid swipe gesture controls and Picture-in-Picture (PiP) multitasking",
         "Background music player service running asynchronously via System Foreground Service",
@@ -80,7 +97,7 @@ export default function FeaturesPage() {
       example: "Minimize the video player to a floating window using Picture-in-Picture while browsing or taking notes.",
     },
     {
-      id: 4,
+      id: 5,
       title: "Clipboard Auto-Detect",
       tagline: "Zero-Click Link Analysis",
       icon: <Zap className="text-yellow-400" size={32} />,
@@ -94,70 +111,69 @@ export default function FeaturesPage() {
       ],
       example: "Copy a tweet URL in X -> Open Vortyx -> Tap 'Use Clipboard Link' banner -> Download starts instantly.",
     },
-    {
-      id: 5,
-      title: "Queue Scheduling & Controls",
-      tagline: "Configure Your Bandwidth",
-      icon: <Sliders className="text-indigo-400" size={32} />,
-      badge: "Smart Queue",
-      desc: "Take total control of your network usage. Vortyx includes a powerful, multi-threaded batch download queue managed via WorkManager. It lets you customize how and when downloads are processed, saving mobile data caps.",
-      benefits: [
-        "Wi-Fi only download setting prevents mobile data usage on large video queues",
-        "Adjustable parallel download limits (1 to 5 files downloading simultaneously)",
-        "Quiet Hours scheduler to pause downloading tasks during work or sleep automatically",
-        "Automatic retry protocol with exponential backoff for network interruptions",
-      ],
-      example: "Set parallel limit to 3, enable Wi-Fi only, and schedule downloads to run between 2:00 AM and 6:00 AM.",
-    },
   ];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-20">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-16">
       
       {/* Header */}
       <div className="text-center space-y-4 max-w-3xl mx-auto">
-        <motion.h1
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-4xl sm:text-5xl font-extrabold tracking-tight"
-        >
-          Explore All features
-        </motion.h1>
+        <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight">
+          Powerful Engineering. Zero Friction.
+        </h1>
         <p className="text-base sm:text-lg text-theme-foreground-muted leading-relaxed">
-          Vortyx is built with modern Android guidelines, combining cutting-edge AI and offline-first capabilities. Discover how each feature helps you manage your media portfolio.
+          Explore the technology behind Vortyx: browser-based universal downloading, multi-engine resolvers, and an offline Android media suite.
         </p>
       </div>
 
-      {/* Main Interactive Grid Layout */}
+      {/* Interactive Tabs Showcase */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         
-        {/* Left Navigation Buttons */}
-        <div className="lg:col-span-4 space-y-3">
-          <span className="block text-xs font-bold uppercase tracking-wider text-theme-foreground-muted mb-2 px-2">
-            Features Navigator
-          </span>
-          <div className="flex overflow-x-auto lg:flex-col gap-2 pb-4 lg:pb-0 no-scrollbar">
-            {features.map((feat) => (
+        {/* Navigation Sidebar */}
+        <div className="lg:col-span-4 flex flex-col gap-2">
+          {features.map((feat, idx) => {
+            const isSelected = selectedFeature === idx;
+            return (
               <button
                 key={feat.id}
-                onClick={() => setSelectedFeature(feat.id)}
-                className={`flex-shrink-0 lg:w-full flex items-center gap-4 px-5 py-4 rounded-2xl text-left transition-all duration-200 cursor-pointer border ${
-                  selectedFeature === feat.id
-                    ? "bg-brand-pink/10 border-brand-pink/30 text-theme-foreground shadow-md"
-                    : "bg-theme-surface border-theme-border/40 text-theme-foreground-muted hover:text-theme-foreground hover:bg-theme-surface-elevated"
+                onClick={() => setSelectedFeature(idx)}
+                className={`p-4 rounded-2xl text-left transition-all duration-200 flex items-center justify-between border cursor-pointer ${
+                  isSelected
+                    ? "bg-theme-surface border-brand-pink/40 shadow-lg shadow-brand-pink/5"
+                    : "bg-transparent border-transparent hover:bg-theme-surface/50 text-theme-foreground-muted"
                 }`}
               >
-                <div className="flex-shrink-0">{feat.icon}</div>
-                <div>
-                  <span className="block text-sm font-bold">{feat.title}</span>
-                  <span className="block text-xs opacity-75 hidden sm:block mt-0.5">{feat.tagline}</span>
+                <div className="flex items-center gap-3">
+                  <div
+                    className={`p-2 rounded-xl border ${
+                      isSelected
+                        ? "bg-theme-surface-elevated border-brand-pink/20"
+                        : "bg-theme-surface border-theme-border/40"
+                    }`}
+                  >
+                    {feat.icon}
+                  </div>
+                  <div>
+                    <span className="block text-sm font-bold text-theme-foreground">
+                      {feat.title}
+                    </span>
+                    <span className="block text-xs text-theme-foreground-muted">
+                      {feat.tagline}
+                    </span>
+                  </div>
                 </div>
+
+                <div
+                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                    isSelected ? "bg-brand-pink scale-125" : "bg-transparent"
+                  }`}
+                />
               </button>
-            ))}
-          </div>
+            );
+          })}
         </div>
 
-        {/* Right Active Card Detail */}
+        {/* Feature Detail Display Card */}
         <div className="lg:col-span-8">
           <motion.div
             key={selectedFeature}
@@ -166,17 +182,17 @@ export default function FeaturesPage() {
             transition={{ duration: 0.3 }}
             className="bg-theme-surface border border-theme-border/40 p-6 sm:p-10 rounded-3xl space-y-8 shadow-xl"
           >
-            {/* Title / Badge */}
+            {/* Top Badge & Title */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-theme-border/20 pb-6">
-              <div className="space-y-1">
-                <span className="text-xs font-semibold text-brand-pink uppercase tracking-wide">
+              <div>
+                <span className="text-xs font-extrabold uppercase tracking-wider text-brand-pink">
                   {features[selectedFeature].tagline}
                 </span>
                 <h2 className="text-2xl sm:text-3xl font-extrabold text-theme-foreground">
                   {features[selectedFeature].title}
                 </h2>
               </div>
-              <span className="px-3.5 py-1.5 rounded-full bg-brand-pink/15 text-brand-pink text-xs font-bold w-fit">
+              <span className="px-3 py-1 rounded-full bg-brand-pink/10 text-brand-pink border border-brand-pink/20 text-xs font-semibold self-start sm:self-auto">
                 {features[selectedFeature].badge}
               </span>
             </div>
@@ -217,23 +233,30 @@ export default function FeaturesPage() {
       </div>
 
       {/* Benefits Summary Banner */}
-      <section className="bg-gradient-to-r from-brand-pink/5 via-brand-coral/5 to-brand-amber/5 border border-theme-border/40 rounded-3xl p-8 sm:p-12">
+      <section className="bg-gradient-to-r from-brand-pink/10 via-brand-coral/10 to-brand-amber/10 border border-brand-pink/20 rounded-3xl p-8 sm:p-12">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
           <div className="md:col-span-8 space-y-4">
             <h2 className="text-2xl sm:text-3xl font-extrabold text-theme-foreground leading-tight">
-              Ready to Upgrade Your Media Workflow?
+              Experience Vortyx Right Now
             </h2>
             <p className="text-sm sm:text-base text-theme-foreground-muted leading-relaxed">
-              Vortyx delivers all these features in a single, lightweight package that does not track your location, collect your browsing habits, or sell your files. Get the native APK installer now.
+              Use our instant Web Downloader in your browser, or install the lightweight 9.54MB Android APK for background batch downloads and offline WhatsApp status saving.
             </p>
           </div>
-          <div className="md:col-span-4 flex justify-start md:justify-end">
+          <div className="md:col-span-4 flex flex-col sm:flex-row md:flex-col lg:flex-row gap-3 justify-start md:justify-end">
+            <Link
+              href="/"
+              className="px-6 py-3.5 rounded-full bg-gradient-to-r from-brand-pink to-brand-coral text-white font-bold text-xs flex items-center justify-center gap-2 hover:brightness-110 shadow-lg shadow-brand-pink/20 transition-all duration-300"
+            >
+              <Globe size={16} />
+              Web Downloader
+            </Link>
             <Link
               href="/download"
-              className="px-8 py-4 rounded-full bg-gradient-to-r from-brand-pink via-brand-coral to-brand-amber text-white font-bold flex items-center gap-2 hover:brightness-110 shadow-lg transition-all duration-300"
+              className="px-6 py-3.5 rounded-full bg-theme-surface border border-theme-border/60 hover:bg-theme-surface-elevated text-theme-foreground font-bold text-xs flex items-center justify-center gap-2 transition-all duration-300"
             >
-              Get Vortyx Today
-              <ArrowRight size={18} />
+              <Smartphone size={16} />
+              Get Android APK
             </Link>
           </div>
         </div>

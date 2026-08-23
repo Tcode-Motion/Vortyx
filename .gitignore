@@ -10,28 +10,38 @@
 !.yarn/releases
 !.yarn/versions
 
-# testing
+# testing & reports
 /coverage
+test_report_200.json
+tests/*.mp4
+*.mp4
 
-# next.js
+# next.js & firebase
 /.next/
 /out/
+/.firebase/
 
 # production
 /build
+
+# local storage & caches
+/.vortyx_storage/
+/.media_cache/
 
 # misc
 .DS_Store
 *.pem
 
-# debug
+# debug & logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
+*.log
 
-# env files (can opt-in for committing if needed)
+# env files
 .env*
+!.env.example
 
 # vercel
 .vercel

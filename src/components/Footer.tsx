@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { Globe, ArrowUp } from "lucide-react";
+import { Globe, ArrowUp, Sparkles, Film, Music, ShieldCheck } from "lucide-react";
 import GithubIcon from "./GithubIcon";
 
 export default function Footer() {
@@ -26,154 +26,202 @@ export default function Footer() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+          
           {/* Brand Column */}
-          <div className="space-y-4">
+          <div className="space-y-4 sm:col-span-2 lg:col-span-1">
             <Link href="/" className="flex items-center gap-2">
-              <span className="text-2xl font-bold bg-gradient-to-r from-brand-pink via-brand-coral to-brand-amber bg-clip-text text-transparent">
+              <span className="text-2xl font-black bg-gradient-to-r from-brand-pink via-brand-coral to-brand-amber bg-clip-text text-transparent">
                 Vortyx
               </span>
             </Link>
-            <p className="text-sm text-theme-foreground-muted max-w-xs leading-relaxed">
-              A professional, offline-first media manager and downloader designed to catalog and download high-quality assets from over 50 social portals.
+            <p className="text-xs sm:text-sm text-theme-foreground-muted leading-relaxed">
+              Universal online media downloader &amp; stream manager supporting 35+ social portals with verified MP4/MP3 delivery.
             </p>
-            <div className="flex items-center gap-4 pt-2">
+            <div className="flex items-center gap-3 pt-2">
               <a
                 href="https://github.com/Tcode-Motion/Vortyx"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-full bg-theme-surface-elevated border border-theme-border/40 hover:text-brand-pink hover:border-brand-pink/30 text-theme-foreground/80 transition-all duration-200"
+                className="p-2 rounded-full bg-theme-surface-elevated border border-theme-border/40 hover:text-brand-pink text-theme-foreground/80 transition-all"
                 aria-label="GitHub Repo"
               >
-                <GithubIcon size={18} />
+                <GithubIcon size={16} />
               </a>
-
-              <a
+              <Link
                 href="/"
-                className="p-2 rounded-full bg-theme-surface-elevated border border-theme-border/40 hover:text-brand-pink hover:border-brand-pink/30 text-theme-foreground/80 transition-all duration-200"
+                className="p-2 rounded-full bg-theme-surface-elevated border border-theme-border/40 hover:text-brand-pink text-theme-foreground/80 transition-all"
                 aria-label="Website"
               >
-                <Globe size={18} />
-              </a>
+                <Globe size={16} />
+              </Link>
             </div>
           </div>
 
-          {/* Links Column - App */}
+          {/* Column 1: Feature Tools */}
           <div>
-            <h3 className="text-sm font-bold uppercase tracking-wider text-theme-foreground mb-4">
-              Explore
+            <h3 className="text-xs font-extrabold uppercase tracking-wider text-theme-foreground mb-3 flex items-center gap-1.5">
+              <Film size={14} className="text-brand-pink" />
+              <span>Core Tools</span>
             </h3>
-            <ul className="space-y-3">
+            <ul className="space-y-2 text-xs">
               <li>
-                <Link href="/" className="text-sm text-theme-foreground-muted hover:text-brand-pink transition-colors">
-                  Home
+                <Link href="/video-downloader" className="text-theme-foreground-muted hover:text-brand-pink transition-colors">
+                  Video Downloader
                 </Link>
               </li>
               <li>
-                <Link href="/features" className="text-sm text-theme-foreground-muted hover:text-brand-pink transition-colors">
-                  Features
+                <Link href="/youtube-downloader" className="text-theme-foreground-muted hover:text-brand-pink transition-colors">
+                  YouTube Downloader
                 </Link>
               </li>
               <li>
-                <Link href="/screenshots" className="text-sm text-theme-foreground-muted hover:text-brand-pink transition-colors">
+                <Link href="/audio-downloader" className="text-theme-foreground-muted hover:text-brand-pink transition-colors">
+                  Audio &amp; MP3 Downloader
+                </Link>
+              </li>
+              <li>
+                <Link href="/playlist-downloader" className="text-theme-foreground-muted hover:text-brand-pink transition-colors">
+                  Playlist Downloader
+                </Link>
+              </li>
+              <li>
+                <Link href="/providers" className="text-theme-foreground-muted hover:text-brand-pink transition-colors font-bold text-brand-pink">
+                  35+ Supported Portals &rarr;
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Column 2: Social Portals */}
+          <div>
+            <h3 className="text-xs font-extrabold uppercase tracking-wider text-theme-foreground mb-3 flex items-center gap-1.5">
+              <Sparkles size={14} className="text-brand-coral" />
+              <span>Social Savers</span>
+            </h3>
+            <ul className="space-y-2 text-xs">
+              <li>
+                <Link href="/instagram-downloader" className="text-theme-foreground-muted hover:text-brand-pink transition-colors">
+                  Instagram Downloader
+                </Link>
+              </li>
+              <li>
+                <Link href="/tiktok-downloader" className="text-theme-foreground-muted hover:text-brand-pink transition-colors">
+                  TikTok Downloader
+                </Link>
+              </li>
+              <li>
+                <Link href="/facebook-downloader" className="text-theme-foreground-muted hover:text-brand-pink transition-colors">
+                  Facebook Downloader
+                </Link>
+              </li>
+              <li>
+                <Link href="/twitter-downloader" className="text-theme-foreground-muted hover:text-brand-pink transition-colors">
+                  X / Twitter Downloader
+                </Link>
+              </li>
+              <li>
+                <Link href="/reddit-downloader" className="text-theme-foreground-muted hover:text-brand-pink transition-colors">
+                  Reddit Downloader
+                </Link>
+              </li>
+              <li>
+                <Link href="/pinterest-downloader" className="text-theme-foreground-muted hover:text-brand-pink transition-colors">
+                  Pinterest Downloader
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Column 3: Audio & Streaming */}
+          <div>
+            <h3 className="text-xs font-extrabold uppercase tracking-wider text-theme-foreground mb-3 flex items-center gap-1.5">
+              <Music size={14} className="text-amber-500" />
+              <span>Music &amp; Audio</span>
+            </h3>
+            <ul className="space-y-2 text-xs">
+              <li>
+                <Link href="/spotify-downloader" className="text-theme-foreground-muted hover:text-brand-pink transition-colors">
+                  Spotify Track Matcher
+                </Link>
+              </li>
+              <li>
+                <Link href="/soundcloud-downloader" className="text-theme-foreground-muted hover:text-brand-pink transition-colors">
+                  SoundCloud to MP3
+                </Link>
+              </li>
+              <li>
+                <Link href="/features" className="text-theme-foreground-muted hover:text-brand-pink transition-colors">
+                  All App Features
+                </Link>
+              </li>
+              <li>
+                <Link href="/download" className="text-theme-foreground-muted hover:text-brand-pink transition-colors">
+                  Android APK Downloader
+                </Link>
+              </li>
+              <li>
+                <Link href="/screenshots" className="text-theme-foreground-muted hover:text-brand-pink transition-colors">
                   App Screenshots
                 </Link>
               </li>
-              <li>
-                <Link href="/download" className="text-sm text-theme-foreground-muted hover:text-brand-pink transition-colors">
-                  Download Installer
-                </Link>
-              </li>
-              <li>
-                <Link href="/about" className="text-sm text-theme-foreground-muted hover:text-brand-pink transition-colors">
-                  About Developer
-                </Link>
-              </li>
             </ul>
           </div>
 
-          {/* Links Column - Support */}
+          {/* Column 4: Help & Legal */}
           <div>
-            <h3 className="text-sm font-bold uppercase tracking-wider text-theme-foreground mb-4">
-              Help & Resources
+            <h3 className="text-xs font-extrabold uppercase tracking-wider text-theme-foreground mb-3 flex items-center gap-1.5">
+              <ShieldCheck size={14} className="text-emerald-500" />
+              <span>Help &amp; Legal</span>
             </h3>
-            <ul className="space-y-3">
+            <ul className="space-y-2 text-xs">
               <li>
-                <Link href="/support" className="text-sm text-theme-foreground-muted hover:text-brand-pink transition-colors">
-                  Get Support
+                <Link href="/faq" className="text-theme-foreground-muted hover:text-brand-pink transition-colors">
+                  FAQ &amp; Guide
                 </Link>
               </li>
               <li>
-                <Link href="/faq" className="text-sm text-theme-foreground-muted hover:text-brand-pink transition-colors">
-                  Frequently Asked Questions
+                <Link href="/about" className="text-theme-foreground-muted hover:text-brand-pink transition-colors">
+                  About Vortyx
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-sm text-theme-foreground-muted hover:text-brand-pink transition-colors">
-                  Contact Form
+                <Link href="/contact" className="text-theme-foreground-muted hover:text-brand-pink transition-colors">
+                  Contact Support
                 </Link>
               </li>
               <li>
-                <Link href="/changelog" className="text-sm text-theme-foreground-muted hover:text-brand-pink transition-colors">
-                  Changelog Timeline
+                <Link href="/changelog" className="text-theme-foreground-muted hover:text-brand-pink transition-colors">
+                  Release Changelog
                 </Link>
               </li>
               <li>
-                <Link href="/licenses" className="text-sm text-theme-foreground-muted hover:text-brand-pink transition-colors">
-                  Open Source Licenses
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Links Column - Legal */}
-          <div>
-            <h3 className="text-sm font-bold uppercase tracking-wider text-theme-foreground mb-4">
-              Legal Policy
-            </h3>
-            <ul className="space-y-3">
-              <li>
-                <Link href="/privacy" className="text-sm text-theme-foreground-muted hover:text-brand-pink transition-colors">
+                <Link href="/privacy" className="text-theme-foreground-muted hover:text-brand-pink transition-colors">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link href="/terms" className="text-sm text-theme-foreground-muted hover:text-brand-pink transition-colors">
+                <Link href="/terms" className="text-theme-foreground-muted hover:text-brand-pink transition-colors">
                   Terms of Service
                 </Link>
               </li>
               <li>
-                <Link href="/disclaimer" className="text-sm text-theme-foreground-muted hover:text-brand-pink transition-colors">
-                  Affiliation Disclaimer
-                </Link>
-              </li>
-              <li>
-                <Link href="/data-deletion" className="text-sm text-theme-foreground-muted hover:text-brand-pink transition-colors">
-                  Data Deletion Request
+                <Link href="/disclaimer" className="text-theme-foreground-muted hover:text-brand-pink transition-colors">
+                  DMCA / Disclaimer
                 </Link>
               </li>
             </ul>
           </div>
+
         </div>
 
-        {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-theme-border/10 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex flex-col items-center md:items-start gap-1">
-            <p className="text-xs text-theme-foreground-muted text-center md:text-left">
-              &copy; {currentYear} Vortyx App. All rights reserved. Not affiliated with Google Play, YouTube, or WhatsApp.
-            </p>
-            <p className="text-[10px] text-theme-foreground-muted/60">
-              Developed by the Vortyx Team. App Package: <code className="bg-theme-surface-elevated px-1.5 py-0.5 rounded border border-theme-border/20">com.vortyx.app</code>
-            </p>
-          </div>
+        <div className="border-t border-theme-border/20 mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-theme-foreground-muted">
+          <p>&copy; {currentYear} Vortyx &bull; Free Universal Media Downloader &amp; Manager.</p>
           <div className="flex items-center gap-4">
-            <span className="text-xs text-theme-foreground-muted">
-              App Version: <strong className="text-theme-foreground font-semibold">1.0</strong>
-            </span>
-            <span className="h-4 w-[1px] bg-theme-border/30" />
-            <span className="text-xs text-theme-foreground-muted">
-              Size: <strong className="text-theme-foreground font-semibold">9.54 MB</strong>
-            </span>
+            <Link href="/privacy" className="hover:text-theme-foreground transition-colors">Privacy</Link>
+            <Link href="/terms" className="hover:text-theme-foreground transition-colors">Terms</Link>
+            <Link href="/disclaimer" className="hover:text-theme-foreground transition-colors">DMCA</Link>
+            <Link href="/data-deletion" className="hover:text-theme-foreground transition-colors">Data Deletion</Link>
           </div>
         </div>
       </div>

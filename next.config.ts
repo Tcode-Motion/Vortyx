@@ -1,12 +1,15 @@
+import path from "path";
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: "export",
+  output: process.env.STATIC_EXPORT === "true" ? "export" : undefined,
   trailingSlash: true,
   images: {
     unoptimized: true,
   },
-  basePath: "/Vortyx",
+  turbopack: {
+    root: path.resolve(__dirname),
+  },
 };
 
 export default nextConfig;

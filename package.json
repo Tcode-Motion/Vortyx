@@ -6,6 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "test:smoke": "npx tsx tests/production_smoke_test.ts",
+    "test:validation": "npx tsx tests/full_production_validation_200.ts",
+    "test:seo": "npx tsx tests/seo_audit_test.ts",
     "lint": "eslint"
   },
   "dependencies": {
@@ -26,3 +29,4 @@
     "typescript": "^5"
   }
 }
+

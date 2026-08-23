@@ -12,6 +12,8 @@ import {
   ExternalLink,
 } from "lucide-react";
 
+const DOWNLOAD_URL = "https://github.com/Tcode-Motion/Vortyx/releases/download/v1.0.0/vortyx-v1.0.apk";
+
 export default function DownloadPage() {
   const [copied, setCopied] = useState(false);
   const sha256 = "23D501404AA6D336DD4BD5C9AFA68595BE8615A9F5358041E1EBA10725CFEBBE";
@@ -54,8 +56,22 @@ export default function DownloadPage() {
           Download Vortyx
         </h1>
         <p className="text-base sm:text-lg text-theme-foreground-muted leading-relaxed">
-          Install the official, unmodified release APK directly onto your Android device. Secure, private, and lightweight.
+          Install the official, unmodified release APK directly onto your Android device, or use our instant online web downloader.
         </p>
+
+        {/* Web Downloader Callout */}
+        <div className="p-4 rounded-2xl bg-gradient-to-r from-brand-pink/10 via-brand-coral/10 to-brand-amber/10 border border-brand-pink/20 flex flex-col sm:flex-row items-center justify-between gap-4 text-left">
+          <div className="space-y-0.5">
+            <span className="text-xs font-bold text-brand-pink uppercase tracking-wider">No Installation Required</span>
+            <p className="text-sm font-semibold text-theme-foreground">Want to download videos without installing the APK?</p>
+          </div>
+          <a
+            href="/"
+            className="px-5 py-2.5 rounded-full bg-gradient-to-r from-brand-pink to-brand-coral text-white font-bold text-xs shadow-md shrink-0 hover:brightness-110 transition-all"
+          >
+            Launch Web Downloader
+          </a>
+        </div>
       </div>
 
       {/* Main Download Card */}
@@ -77,8 +93,9 @@ export default function DownloadPage() {
             {/* Downloader Button */}
             <div className="flex flex-col sm:flex-row items-center gap-4">
               <a
-                href="/Vortyx/vortyx-v1.0.apk"
-                download
+                href={DOWNLOAD_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-full sm:w-auto px-10 py-5 rounded-full bg-gradient-to-r from-brand-pink via-brand-coral to-brand-amber text-white font-bold flex items-center justify-center gap-3 shadow-lg shadow-brand-pink/20 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
               >
                 <Download size={22} />
