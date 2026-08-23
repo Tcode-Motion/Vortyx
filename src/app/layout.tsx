@@ -86,6 +86,9 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  verification: {
+    google: "googled4c31693a78a0881.html",
+  },
   manifest: "/Vortyx/manifest.webmanifest",
   icons: {
     icon: [
