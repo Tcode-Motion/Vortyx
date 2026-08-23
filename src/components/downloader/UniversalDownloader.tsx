@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { assetUrl } from "../../lib/utils/assetPath";
+import { extractMediaFromUrl } from "../../services/mediaExtractor";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Download,
@@ -211,29 +212,69 @@ export default function UniversalDownloader() {
     setSelectedCandidate(null);
 
     try {
-      const res = await fetch(assetUrl("/api/resolve"), {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ url: targetUrl, mode }),
-      });
+      let resolvedData: any = null;
 
-      const data = await res.json();
+      // 1. Try server endpoint first (when running on Node.js/Vercel)
+      try {
+        const res = await fetch(assetUrl("/api/resolve"), {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ url: targetUrl, mode }),
+        });
 
-      if (!res.ok) {
-        throw new Error(data.error || "Extraction failed.");
+        const contentType = res.headers.get("content-type") || "";
+        if (res.ok && contentType.includes("application/json")) {
+          const data = await res.json();
+          if (data && data.formats && data.formats.length > 0) {
+            resolvedData = data;
+          }
+        }
+      } catch {
+        // Fall through to client-side extraction
       }
 
-      setResult(data);
-      if (data.candidateMatches && data.candidateMatches.length > 0) {
-        setSelectedCandidate(data.candidateMatches[0]);
+      // 2. Client-side fallback (on static hosts like GitHub Pages)
+      if (!resolvedData) {
+        const clientMedia = await extractMediaFromUrl(targetUrl, mode);
+        if (clientMedia && clientMedia.formats && clientMedia.formats.length > 0) {
+          resolvedData = {
+            id: `media_${Date.now()}`,
+            url: clientMedia.originalUrl,
+            title: clientMedia.title,
+            thumbnail: clientMedia.thumbnail,
+            uploader: clientMedia.author,
+            category: clientMedia.downloadMode === "audio" ? "music" : "social",
+            formats: clientMedia.formats.map((f, i) => ({
+              id: f.id || `fmt_${i}`,
+              label: f.label,
+              quality: f.quality,
+              type: f.type,
+              container: f.extension || "mp4",
+              url: f.url || clientMedia.originalUrl,
+              sizeLabel: f.sizeLabel || "Direct Stream",
+              isDirectStream: true,
+            })),
+            thumbnails: clientMedia.thumbnail ? [{ url: clientMedia.thumbnail, width: 640, height: 480, label: "HQ Thumbnail" }] : [],
+            isLive: false,
+          };
+        }
+      }
+
+      if (!resolvedData) {
+        throw new Error("Unable to extract media from this URL. Please verify the URL is public and accessible.");
+      }
+
+      setResult(resolvedData);
+      if (resolvedData.candidateMatches && resolvedData.candidateMatches.length > 0) {
+        setSelectedCandidate(resolvedData.candidateMatches[0]);
       }
 
       // Default category
-      if (data.category === "music") {
+      if (resolvedData.category === "music") {
         setActiveCategory("audio");
-      } else if (data.formats.some((f: MediaFormatOption) => f.type === "video")) {
+      } else if (resolvedData.formats.some((f: MediaFormatOption) => f.type === "video")) {
         setActiveCategory("video");
-      } else if (data.formats.some((f: MediaFormatOption) => f.type === "audio")) {
+      } else if (resolvedData.formats.some((f: MediaFormatOption) => f.type === "audio")) {
         setActiveCategory("audio");
       } else {
         setActiveCategory("all");
@@ -241,7 +282,7 @@ export default function UniversalDownloader() {
 
       setJobState(JobState.READY);
     } catch (err: any) {
-      triggerErrorWithVideo(err?.message || "Unable to extract media from this URL or usage limit reached.");
+      triggerErrorWithVideo(err?.message || "Unable to extract media from this URL. Please verify the link is public.");
     }
   };
 

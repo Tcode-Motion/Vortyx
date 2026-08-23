@@ -179,10 +179,15 @@ export function detectPlatform(url: string): PlatformMeta {
   };
 }
 
+function extractYouTubeId(url: string): string | null {
+  const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|shorts\/|watch\?.+&v=))([\w-]{11})/);
+  return match ? match[1] : null;
+}
+
 /**
  * Universal Extraction Pipeline:
- * 1. Queries Next.js Server-Side API (/api/resolve) for zero CORS & full quality ladder
- * 2. Falls back to direct metadata resolvers if server is offline
+ * 1. Safely queries Next.js Server-Side API (/api/resolve) if available (Node.js/Vercel)
+ * 2. Gracefully falls back to client-side oEmbed & platform metadata resolvers on static hosts (GitHub Pages)
  */
 export async function extractMediaFromUrl(
   inputUrl: string,
@@ -195,7 +200,7 @@ export async function extractMediaFromUrl(
 
   const platform = detectPlatform(url);
 
-  // 1. Next.js Server Resolver API
+  // 1. Next.js Server Resolver API (Only when running with a backend)
   try {
     const res = await fetch(assetUrl("/api/resolve"), {
       method: "POST",
@@ -205,14 +210,15 @@ export async function extractMediaFromUrl(
       body: JSON.stringify({ url, mode: preferredMode }),
     });
 
-    if (res.ok) {
-      const data: ExtractedMedia = await res.json();
+    const contentType = res.headers.get("content-type") || "";
+    if (res.ok && contentType.includes("application/json")) {
+      const data = await res.json();
       if (data && data.formats && data.formats.length > 0) {
         return data;
       }
     }
   } catch {
-    // Proceed to fallback
+    // Proceed to client fallback without crashing
   }
 
   // 2. Client-Side Open Metadata / oEmbed Fallback
@@ -232,109 +238,130 @@ async function resolveClientFallback(
   mode: "auto" | "audio" | "video"
 ): Promise<ExtractedMedia | null> {
   try {
-    let oembed = "";
-    if (platform.id === "youtube") {
-      oembed = `https://noembed.com/embed?url=${encodeURIComponent(url)}`;
-    } else if (platform.id === "spotify") {
-      oembed = `https://open.spotify.com/oembed?url=${encodeURIComponent(url)}`;
-    } else if (platform.id === "soundcloud") {
-      oembed = `https://soundcloud.com/oembed?format=json&url=${encodeURIComponent(url)}`;
-    } else if (platform.id === "tiktok") {
-      oembed = `https://www.tiktok.com/oembed?url=${encodeURIComponent(url)}`;
-    }
+    let title = `${platform.name} Media`;
+    let author = "";
+    let thumbnail = assetUrl("/icon.png");
 
-    if (oembed) {
-      const resp = await fetch(oembed);
-      if (resp.ok) {
-        const data = await resp.json();
-        const title = data.title || `${platform.name} Media`;
-        const author = data.author_name || "";
-        const thumbnail = data.thumbnail_url || "/icon.png";
-
-        const formats: ExtractedFormat[] = [
-          {
-            id: "fmt-1080",
-            type: "video",
-            quality: "1080p Full HD",
-            label: "Full HD Video (1080p MP4)",
-            extension: "mp4",
-            url: url,
-            sizeLabel: "1080p HD",
-            isDirectStream: true,
-          },
-          {
-            id: "fmt-720",
-            type: "video",
-            quality: "720p HD",
-            label: "Standard HD (720p MP4)",
-            extension: "mp4",
-            url: url,
-            sizeLabel: "Standard",
-            isDirectStream: true,
-          },
-          {
-            id: "fmt-480",
-            type: "video",
-            quality: "480p SD",
-            label: "Data Saver (480p MP4)",
-            extension: "mp4",
-            url: url,
-            sizeLabel: "Data Saver",
-            isDirectStream: true,
-          },
-          {
-            id: "fmt-320k",
-            type: "audio",
-            quality: "320 kbps (HQ MP3)",
-            label: "Studio Quality Audio (320kbps MP3)",
-            extension: "mp3",
-            url: url,
-            sizeLabel: "HQ MP3",
-            isDirectStream: true,
-          },
-          {
-            id: "fmt-128k",
-            type: "audio",
-            quality: "128 kbps (MP3)",
-            label: "Standard Audio (128kbps MP3)",
-            extension: "mp3",
-            url: url,
-            sizeLabel: "128k MP3",
-            isDirectStream: true,
-          },
-        ];
-
-        if (thumbnail && thumbnail !== "/icon.png") {
-          formats.push({
-            id: "fmt-art",
-            type: "image",
-            quality: "Full Resolution",
-            label: "Cover Artwork / Thumbnail (JPG)",
-            extension: "jpg",
-            url: thumbnail,
-            sizeLabel: "Original Image",
-          });
+    // YouTube Extraction
+    const ytId = extractYouTubeId(url);
+    if (ytId) {
+      thumbnail = `https://i.ytimg.com/vi/${ytId}/hqdefault.jpg`;
+      try {
+        const ytRes = await fetch(`https://noembed.com/embed?url=https://www.youtube.com/watch?v=${ytId}`);
+        if (ytRes.ok) {
+          const ytData = await ytRes.json();
+          if (ytData.title) title = ytData.title;
+          if (ytData.author_name) author = ytData.author_name;
+          if (ytData.thumbnail_url) thumbnail = ytData.thumbnail_url;
         }
+      } catch {}
+    } else {
+      // General oEmbed
+      let oembed = "";
+      if (platform.id === "spotify") {
+        oembed = `https://open.spotify.com/oembed?url=${encodeURIComponent(url)}`;
+      } else if (platform.id === "soundcloud") {
+        oembed = `https://soundcloud.com/oembed?format=json&url=${encodeURIComponent(url)}`;
+      } else if (platform.id === "tiktok") {
+        oembed = `https://www.tiktok.com/oembed?url=${encodeURIComponent(url)}`;
+      } else if (platform.id === "twitter") {
+        oembed = `https://publish.twitter.com/oembed?url=${encodeURIComponent(url)}`;
+      }
 
-        return {
-          originalUrl: url,
-          title,
-          platform: platform.name,
-          platformId: platform.id,
-          author,
-          thumbnail,
-          formats,
-          previewUrl: thumbnail,
-          previewType: mode === "audio" ? "audio" : "video",
-          downloadMode: mode,
-        };
+      if (oembed) {
+        try {
+          const resp = await fetch(oembed);
+          if (resp.ok) {
+            const data = await resp.json();
+            if (data.title) title = data.title;
+            if (data.author_name) author = data.author_name;
+            if (data.thumbnail_url) thumbnail = data.thumbnail_url;
+          }
+        } catch {}
       }
     }
-  } catch {
-    // Fallback error
-  }
 
-  return null;
+    const formats: ExtractedFormat[] = [
+      {
+        id: "fmt-1080",
+        type: "video",
+        quality: "1080p Full HD",
+        label: "Full HD Video (1080p MP4)",
+        extension: "mp4",
+        url: url,
+        sizeLabel: "1080p HD",
+        isDirectStream: true,
+      },
+      {
+        id: "fmt-720",
+        type: "video",
+        quality: "720p HD",
+        label: "Standard HD (720p MP4)",
+        extension: "mp4",
+        url: url,
+        sizeLabel: "Standard",
+        isDirectStream: true,
+      },
+      {
+        id: "fmt-480",
+        type: "video",
+        quality: "480p SD",
+        label: "Data Saver (480p MP4)",
+        extension: "mp4",
+        url: url,
+        sizeLabel: "Data Saver",
+        isDirectStream: true,
+      },
+      {
+        id: "fmt-320k",
+        type: "audio",
+        quality: "320 kbps (HQ MP3)",
+        label: "Studio Quality Audio (320kbps MP3)",
+        extension: "mp3",
+        url: url,
+        sizeLabel: "HQ MP3",
+        isDirectStream: true,
+      },
+      {
+        id: "fmt-128k",
+        type: "audio",
+        quality: "128 kbps (MP3)",
+        label: "Standard Audio (128kbps MP3)",
+        extension: "mp3",
+        url: url,
+        sizeLabel: "128k MP3",
+        isDirectStream: true,
+      },
+    ];
+
+    if (thumbnail && !thumbnail.includes("icon.png")) {
+      formats.push({
+        id: "fmt-art",
+        type: "image",
+        quality: "Full Resolution",
+        label: "Cover Artwork / Thumbnail (JPG)",
+        extension: "jpg",
+        url: thumbnail,
+        sizeLabel: "Original Image",
+        isDirectStream: true,
+      });
+    }
+
+    return {
+      originalUrl: url,
+      title,
+      platform: platform.name,
+      platformId: platform.id,
+      author,
+      thumbnail,
+      formats,
+      previewUrl: thumbnail,
+      previewType: mode === "audio" ? "audio" : "video",
+      downloadMode: mode,
+    };
+  } catch {
+    return null;
+  }
 }
 
 export async function triggerFileDownload(url: string, filename: string) {
@@ -347,8 +374,6 @@ export async function triggerFileDownload(url: string, filename: string) {
   setTimeout(() => {
     try {
       document.body.removeChild(a);
-    } catch {
-      // Ignore
-    }
+    } catch {}
   }, 1000);
 }

@@ -43,8 +43,31 @@ function copyRecursive(src, dest, ignoreDirs = []) {
   }
 }
 
+// 4. Flatten Next.js RSC payload files (__next.route/__PAGE__.txt -> __next.route.__PAGE__.txt)
+function fixRscPayloadFiles(targetDir) {
+  if (!fs.existsSync(targetDir)) return;
+  const entries = fs.readdirSync(targetDir, { withFileTypes: true });
+  for (const entry of entries) {
+    const fullPath = path.join(targetDir, entry.name);
+    if (entry.isDirectory()) {
+      if (entry.name.startsWith('__next.')) {
+        const pageTxt = path.join(fullPath, '__PAGE__.txt');
+        if (fs.existsSync(pageTxt)) {
+          const flatTxt = path.join(targetDir, `${entry.name}.__PAGE__.txt`);
+          fs.copyFileSync(pageTxt, flatTxt);
+        }
+      }
+      fixRscPayloadFiles(fullPath);
+    }
+  }
+}
+
 // Mirror all pages and chunks to out/Vortyx
 console.log('Mirroring out/ content to out/Vortyx/ for GitHub Pages subpath compatibility...');
 copyRecursive(outDir, vortyxDir, ['Vortyx', '.git']);
+
+// Apply RSC payload aliases to both out/ and out/Vortyx/
+fixRscPayloadFiles(outDir);
+fixRscPayloadFiles(vortyxDir);
 
 console.log('Post-build sync complete. out/ is ready for dual root and subpath hosting.');
