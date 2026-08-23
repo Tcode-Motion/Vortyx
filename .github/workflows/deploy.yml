@@ -1,0 +1,52 @@
+name: Build, Test and Deploy Vortyx Website
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "deploy"
+  cancel-in-progress: false
+
+jobs:
+  build-and-test:
+    name: Build & Verify Production Architecture
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Execute Extension API Tests
+        run: npx tsx tests/extension_api_test.ts
+
+      - name: Execute SEO & Metadata Audit
+        run: npx tsx tests/seo_audit_test.ts
+
+      - name: Execute Storage & Pipeline Smoke Tests
+        run: npx tsx tests/production_smoke_test.ts
+
+      - name: Build Next.js Production App
+        run: npm run build
+
+      - name: Verify Production Artifacts
+        run: |
+          echo "Production build completed successfully!"
+          ls -la .next/
