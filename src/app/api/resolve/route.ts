@@ -3,6 +3,8 @@ import { providerRegistry } from "../../../lib/providers/registry";
 import { validateUrlSecurity, SecurityError } from "../../../lib/security/ssrfGuard";
 import { checkRateLimit, getClientIp } from "../../../lib/security/rateLimiter";
 
+export const dynamic = "force-static";
+
 export async function POST(req: NextRequest) {
   const ip = getClientIp(req);
   const rateLimit = checkRateLimit(ip);
@@ -70,14 +72,11 @@ export async function POST(req: NextRequest) {
 }
 
 export async function GET(req: NextRequest) {
-  const targetUrl = req.nextUrl.searchParams.get("url") || "";
-  const mode = (req.nextUrl.searchParams.get("mode") || "auto") as "auto" | "audio" | "video";
+  const targetUrl = req?.nextUrl?.searchParams?.get("url") || "";
+  const mode = (req?.nextUrl?.searchParams?.get("mode") || "auto") as "auto" | "audio" | "video";
 
   if (!targetUrl) {
-    return NextResponse.json(
-      { error: "Query parameter 'url' is required.", isError: true, errorVideoUrl: "/error-video.mp4" },
-      { status: 400 }
-    );
+    return NextResponse.json({ status: "ready", message: "Vortyx media resolution service active." });
   }
 
   const ip = getClientIp(req);

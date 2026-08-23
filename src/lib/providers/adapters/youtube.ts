@@ -59,7 +59,7 @@ export class YouTubeProvider extends BaseProvider {
       let authorUrl = "";
       let durationSeconds = 0;
       let durationLabel = "";
-      let thumbnail = videoId ? `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg` : "/Vortyx/icon.png";
+      let thumbnail = videoId ? `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg` : "/icon.png";
 
       // 1. Try extracting rich info via native pipeline
       try {

@@ -60,7 +60,7 @@ export const metadata: Metadata = {
     siteName: "Vortyx App & Web Downloader",
     images: [
       {
-        url: "/Vortyx/icon.png",
+        url: "icon.png",
         width: 512,
         height: 512,
         alt: "Vortyx App Icon & Web Downloader",
@@ -72,7 +72,7 @@ export const metadata: Metadata = {
     title: "Vortyx — Universal All-Media Downloader & Player",
     description:
       "Paste any link from YouTube, Instagram, TikTok, SoundCloud, or X to download 1080p MP4 or 320k MP3 directly in your browser or with our native Android app.",
-    images: ["/Vortyx/icon.png"],
+    images: ["icon.png"],
     creator: "@VortyxApp",
   },
   robots: {
@@ -86,9 +86,11 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  manifest: "/manifest.json",
+  manifest: "/Vortyx/manifest.webmanifest",
   icons: {
-    icon: "/Vortyx/icon.png",
+    icon: [
+      { url: "/Vortyx/icon.png" },
+    ],
     shortcut: "/Vortyx/icon.png",
     apple: "/Vortyx/icon.png",
   },

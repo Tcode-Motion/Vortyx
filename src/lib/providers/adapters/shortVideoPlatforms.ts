@@ -1,6 +1,7 @@
 import { BaseProvider, ResolveOptions } from "../base";
 import { NormalizedMedia, ProviderCapability, MediaFormatOption, ThumbnailOption } from "../../types/media";
 import { secureFetch } from "../../security/ssrfGuard";
+import { providerNodeManager } from "../cobaltClient";
 
 export class ShortVideoPlatformsProvider extends BaseProvider {
   public readonly id = "short_video";
@@ -45,7 +46,7 @@ export class ShortVideoPlatformsProvider extends BaseProvider {
     try {
       let title = `${sub.name} Video (Watermark-Free)`;
       let author = `${sub.name} Creator`;
-      let thumbnail = "/Vortyx/icon.png";
+      let thumbnail = "/icon.png";
       let videoUrl = "";
       let audioUrl = "";
 
@@ -69,22 +70,17 @@ export class ShortVideoPlatformsProvider extends BaseProvider {
         }
       }
 
-      // 2. Generic Cobalt Fallback
+      // 2. Server-side Provider Node Fallback
       if (!videoUrl) {
         try {
-          const res = await secureFetch("https://api.cobalt.liubquanti.click", {
-            method: "POST",
-            headers: { "Accept": "application/json", "Content-Type": "application/json" },
-            body: JSON.stringify({ url, videoQuality: "1080", downloadMode: "auto" }),
-          });
-          if (res.ok) {
-            const d = await res.json();
-            videoUrl = d.url || "";
-            title = d.filename || d.title || title;
-            thumbnail = d.thumbnail || thumbnail;
+          const resolved = await providerNodeManager.requestResolution(url, { videoQuality: "1080" });
+          if (resolved && resolved.url) {
+            videoUrl = resolved.url;
+            title = resolved.filename || resolved.title || title;
+            thumbnail = resolved.thumbnail || thumbnail;
           }
         } catch {
-          // Fallback
+          // Fallback gracefully
         }
       }
 

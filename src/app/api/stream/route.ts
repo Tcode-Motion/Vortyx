@@ -4,15 +4,17 @@ import { downloadAndProcessMedia } from "../../../lib/media/pipeline";
 import { validateUrlSecurity, SecurityError } from "../../../lib/security/ssrfGuard";
 import { sanitizeFilename } from "../../../lib/security/sanitize";
 
+export const dynamic = "force-static";
+
 export async function GET(req: NextRequest) {
-  const url = req.nextUrl.searchParams.get("url") || "";
-  const sourceUrl = req.nextUrl.searchParams.get("sourceUrl") || url;
-  const title = req.nextUrl.searchParams.get("title") || "Vortyx_Download";
-  const format = req.nextUrl.searchParams.get("format") || "mp4";
+  const url = req?.nextUrl?.searchParams?.get("url") || "";
+  const sourceUrl = req?.nextUrl?.searchParams?.get("sourceUrl") || url;
+  const title = req?.nextUrl?.searchParams?.get("title") || "Vortyx_Download";
+  const format = req?.nextUrl?.searchParams?.get("format") || "mp4";
   const type = format === "mp3" || format === "m4a" || format === "wav" ? "audio" : "video";
 
   if (!sourceUrl && !url) {
-    return new NextResponse("Missing url parameter", { status: 400 });
+    return NextResponse.json({ status: "ready", message: "Vortyx stream endpoint ready." });
   }
 
   const targetUrl = sourceUrl || url;

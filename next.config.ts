@@ -1,8 +1,11 @@
 import path from "path";
 import type { NextConfig } from "next";
 
+const basePath = "/Vortyx";
+
 const nextConfig: NextConfig = {
-  output: process.env.STATIC_EXPORT === "true" ? "export" : undefined,
+  output: "export",
+  basePath: basePath,
   trailingSlash: true,
   images: {
     unoptimized: true,
@@ -13,3 +16,4 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
+

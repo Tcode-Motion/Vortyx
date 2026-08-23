@@ -68,18 +68,19 @@ export class MusicServicesProvider extends BaseProvider {
     try {
       let title = "Music Track";
       let author = "Artist";
-      let thumbnail = "/Vortyx/icon.png";
+      let thumbnail = "/icon.png";
+      let isrc = "";
       let durationSec = 210;
 
-      // 1. Resolve metadata via oEmbed
+      // 1. Resolve metadata via legal OEmbed or client search
       if (sub.id === "spotify") {
         try {
-          const res = await secureFetch(`https://open.spotify.com/oembed?url=${encodeURIComponent(url)}`);
-          if (res.ok) {
-            const d = await res.json();
-            title = d.title || title;
-            author = d.author_name || author;
-            thumbnail = d.thumbnail_url || thumbnail;
+          const oembed = await secureFetch(`https://open.spotify.com/oembed?url=${encodeURIComponent(url)}`);
+          if (oembed.ok) {
+            const data = await oembed.json();
+            title = data.title || title;
+            author = data.author_name || author;
+            thumbnail = data.thumbnail_url || "/icon.png";
           }
         } catch {}
       } else if (sub.id === "soundcloud") {

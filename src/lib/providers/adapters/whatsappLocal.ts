@@ -33,7 +33,7 @@ export class WhatsAppLocalProvider extends BaseProvider {
       capabilities: this.capabilities,
       title: "WhatsApp Web Status Session",
       author: "Local User Device",
-      thumbnail: "/Vortyx/screenshots/statussaver.png",
+      thumbnail: "/screenshots/statussaver.png",
       thumbnails: [],
       formats: [],
       subtitles: [],

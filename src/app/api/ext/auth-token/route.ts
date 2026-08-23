@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
 
+export const dynamic = "force-static";
+
 const ALLOWED_ORIGINS = [
   "https://techscript.is-a.dev",
   "https://web.whatsapp.com",

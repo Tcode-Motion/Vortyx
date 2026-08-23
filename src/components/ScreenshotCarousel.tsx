@@ -5,6 +5,7 @@ import { ChevronLeft, ChevronRight, ZoomIn, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import PhoneMockup from "./PhoneMockup";
+import { assetUrl } from "../lib/utils/assetPath";
 
 interface ScreenshotItem {
   src: string;
@@ -20,31 +21,31 @@ export default function ScreenshotCarousel() {
 
   const items: ScreenshotItem[] = [
     {
-      src: "/Vortyx/screenshots/home.png",
+      src: assetUrl("/screenshots/home.png"),
       title: "Universal Downloader",
       desc: "Analyze and download media from 50+ portals with one tap.",
       alt: "Vortyx Downloader Tab Screenshot",
     },
     {
-      src: "/Vortyx/screenshots/downloads.png",
+      src: assetUrl("/screenshots/downloads.png"),
       title: "Active Download Queue",
       desc: "Track real-time progress, speeds, and schedule background syncs.",
       alt: "Vortyx Downloads Queue Screenshot",
     },
     {
-      src: "/Vortyx/screenshots/galary.png",
+      src: assetUrl("/screenshots/galary.png"),
       title: "Offline Media Library",
       desc: "Organize and play your downloaded videos and audio files locally.",
       alt: "Vortyx Gallery Tab Screenshot",
     },
     {
-      src: "/Vortyx/screenshots/statussaver.png",
+      src: assetUrl("/screenshots/statussaver.png"),
       title: "WhatsApp Status Saver",
       desc: "Instantly view and save WhatsApp statuses without using internet data.",
       alt: "Vortyx WhatsApp Saver Tab Screenshot",
     },
     {
-      src: "/Vortyx/screenshots/satings.png",
+      src: assetUrl("/screenshots/satings.png"),
       title: "App Customization & Settings",
       desc: "Control clipboard monitoring, Wi-Fi scheduling, and parallel thread limits.",
       alt: "Vortyx Settings Tab Screenshot",

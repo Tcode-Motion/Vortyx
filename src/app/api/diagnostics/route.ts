@@ -3,6 +3,8 @@ import { providerRegistry } from "../../../lib/providers/registry";
 import { jobManager } from "../../../lib/queue/jobManager";
 import { diskStorage } from "../../../lib/storage/diskStorage";
 
+export const dynamic = "force-static";
+
 export async function GET() {
   const catalog = providerRegistry.getCatalog();
   const activeJobs = jobManager.listActiveJobs();

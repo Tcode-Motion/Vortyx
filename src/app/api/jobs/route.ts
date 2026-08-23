@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { jobManager } from "../../../lib/queue/jobManager";
 import { getClientIp, acquireJobSlot, releaseJobSlot } from "../../../lib/security/rateLimiter";
 
+export const dynamic = "force-static";
+
 export async function POST(req: NextRequest) {
   const ip = getClientIp(req);
   if (!acquireJobSlot(ip)) {

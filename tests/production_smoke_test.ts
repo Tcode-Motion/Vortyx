@@ -123,7 +123,7 @@ async function runProductionSmokeTest() {
   const cleanupResult = await diskStorage.cleanupExpiredFiles(30 * 60 * 1000);
   assert(cleanupResult.deletedCount >= 1, `Storage cleanup removed ${cleanupResult.deletedCount} expired files`);
   assert(!fs.existsSync(dummyExpiredPath), "Expired dummy file successfully purged from disk");
-  assert(fs.existsSync(mediaResult.filePath), "Active/recent media file preserved on disk");
+  assert(fs.existsSync(mediaFilePath), "Active/recent media file preserved on disk");
 
   // --- Summary ---
   console.log("\n================================================================================");

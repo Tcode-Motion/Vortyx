@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { assetUrl } from "../../lib/utils/assetPath";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Download,
@@ -210,7 +211,7 @@ export default function UniversalDownloader() {
     setSelectedCandidate(null);
 
     try {
-      const res = await fetch("/api/resolve", {
+      const res = await fetch(assetUrl("/api/resolve"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ url: targetUrl, mode }),
@@ -384,7 +385,7 @@ export default function UniversalDownloader() {
                 >
                   <div className="flex items-center gap-3 overflow-hidden">
                     <div className="relative w-12 h-12 rounded-xl overflow-hidden bg-black/40 shrink-0">
-                      <Image src={h.thumbnail || "/Vortyx/icon.png"} alt={h.title} fill className="object-cover" unoptimized />
+                      <Image src={h.thumbnail || assetUrl("/icon.png")} alt={h.title} fill className="object-cover" unoptimized />
                     </div>
                     <div className="overflow-hidden">
                       <span className="text-xs font-extrabold text-theme-foreground block truncate">{h.title}</span>
@@ -601,7 +602,7 @@ export default function UniversalDownloader() {
                       <div className="relative rounded-2xl overflow-hidden bg-black/90 border border-red-500/30 aspect-video max-w-lg mx-auto shadow-2xl">
                         <video
                           ref={errorVideoRef}
-                          src="/error-video.mp4"
+                          src={assetUrl("/error-video.mp4")}
                           controls
                           autoPlay
                           loop

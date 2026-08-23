@@ -31,6 +31,7 @@ import {
   Puzzle,
   StopCircle,
 } from "lucide-react";
+import { assetUrl } from "../lib/utils/assetPath";
 
 export type ScannerStage =
   | "IDLE"
@@ -188,7 +189,7 @@ export default function WhatsAppWebSaver() {
     window.postMessage({ type: "VORTYX_BRIDGE_PING", nonce: Date.now() }, "*");
 
     // Probe activation endpoint to verify extension API readiness
-    fetch("/api/ext/activate", { method: "GET" })
+    fetch(assetUrl("/api/ext/activate"), { method: "GET" })
       .then((res) => res.json())
       .catch(() => {});
   };
@@ -252,7 +253,7 @@ export default function WhatsAppWebSaver() {
 
       // Probe API token to guarantee handshake
       try {
-        await fetch("/api/ext/auth-token", { signal: abortController.signal }).catch(() => {});
+        await fetch(assetUrl("/api/ext/auth-token"), { signal: abortController.signal }).catch(() => {});
       } catch {}
 
       // Stage 3: 25% CHECKING_WHATSAPP_WEB (after 400ms)

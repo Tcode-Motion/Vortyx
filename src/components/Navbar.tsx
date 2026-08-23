@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useTheme } from "./ThemeContext";
+import { assetUrl } from "../lib/utils/assetPath";
 import {
   Sun,
   Moon,
@@ -60,7 +61,7 @@ export default function Navbar() {
               <div className="relative w-9 h-9 sm:w-11 sm:h-11 overflow-hidden rounded-2xl bg-gradient-to-tr from-brand-pink via-brand-coral to-brand-amber p-[2px] transition-transform duration-300 group-hover:scale-105 shadow-md shadow-brand-pink/15">
                 <div className="w-full h-full bg-theme-surface rounded-[14px] flex items-center justify-center overflow-hidden">
                   <Image
-                    src="/Vortyx/icon.png"
+                    src={assetUrl("/icon.png")}
                     alt="Vortyx Logo"
                     width={36}
                     height={36}

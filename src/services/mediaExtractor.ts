@@ -1,6 +1,10 @@
 // Universal Client-Side Media Extractor & Resolver
 // Supports YouTube (4K-360p), Spotify (320k-128k MP3), TikTok (No Watermark), Instagram, X/Twitter, SoundCloud, Reddit, and 50+ portals
 
+import { NormalizedMedia, MediaFormatOption } from "../lib/types/media";
+import { ALL_PLATFORM_CATALOG } from "../lib/providers/catalogData";
+import { assetUrl } from "../lib/utils/assetPath";
+
 export interface ExtractedFormat {
   id: string;
   type: "video" | "audio" | "image";
@@ -193,7 +197,7 @@ export async function extractMediaFromUrl(
 
   // 1. Next.js Server Resolver API
   try {
-    const res = await fetch("/api/resolve", {
+    const res = await fetch(assetUrl("/api/resolve"), {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -245,7 +249,7 @@ async function resolveClientFallback(
         const data = await resp.json();
         const title = data.title || `${platform.name} Media`;
         const author = data.author_name || "";
-        const thumbnail = data.thumbnail_url || "/Vortyx/icon.png";
+        const thumbnail = data.thumbnail_url || "/icon.png";
 
         const formats: ExtractedFormat[] = [
           {
@@ -300,7 +304,7 @@ async function resolveClientFallback(
           },
         ];
 
-        if (thumbnail && thumbnail !== "/Vortyx/icon.png") {
+        if (thumbnail && thumbnail !== "/icon.png") {
           formats.push({
             id: "fmt-art",
             type: "image",

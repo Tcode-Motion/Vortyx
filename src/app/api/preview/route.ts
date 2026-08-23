@@ -3,13 +3,15 @@ import fs from "fs";
 import { downloadAndProcessMedia } from "../../../lib/media/pipeline";
 import { validateUrlSecurity, SecurityError } from "../../../lib/security/ssrfGuard";
 
+export const dynamic = "force-static";
+
 export async function GET(req: NextRequest) {
-  const targetUrl = req.nextUrl.searchParams.get("url") || "";
-  const type = (req.nextUrl.searchParams.get("type") || "video") as "video" | "audio";
-  const quality = req.nextUrl.searchParams.get("quality") || "1080";
+  const targetUrl = req?.nextUrl?.searchParams?.get("url") || "";
+  const type = (req?.nextUrl?.searchParams?.get("type") || "video") as "video" | "audio";
+  const quality = req?.nextUrl?.searchParams?.get("quality") || "1080";
 
   if (!targetUrl) {
-    return new NextResponse("Missing url parameter", { status: 400 });
+    return NextResponse.json({ status: "ready", message: "Vortyx preview endpoint ready." });
   }
 
   // 1. SSRF Protection
