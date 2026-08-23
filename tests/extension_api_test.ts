@@ -85,7 +85,11 @@ async function runExtensionApiTests() {
   console.log(`   EXTENSION API AUDIT SUMMARY: ${passed} PASSED, ${failed} FAILED`);
   console.log("================================================================================\n");
 
-  if (failed > 0) process.exit(1);
+  if (failed > 0) {
+    process.exit(1);
+  } else {
+    process.exit(0);
+  }
 }
 
 runExtensionApiTests().catch((e) => {
